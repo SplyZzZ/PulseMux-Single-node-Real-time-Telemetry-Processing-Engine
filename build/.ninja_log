@@ -1,0 +1,7 @@
+# ninja log v7
+49	1714	7885434684526101	_deps/simdjson-build/CMakeFiles/simdjson.dir/src/simdjson.cpp.obj	582f9046311253e6
+1717	1856	7885434701214317	_deps/simdjson-build/simdjson.lib	e7010b2d65aedbcb
+58	3666	7885434684606066	CMakeFiles/PulseMux_app.dir/apps/main.cpp.obj	164ca8c957173840
+3668	4382	7885434720701975	PulseMux_app.exe	ae47fdfb936dc60d
+58	3157	7885435934466668	CMakeFiles/PulseMux_app.dir/apps/main.cpp.obj	164ca8c957173840
+3158	3556	7885435965460468	PulseMux_app.exe	ae47fdfb936dc60d
