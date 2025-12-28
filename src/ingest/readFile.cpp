@@ -1,6 +1,7 @@
 #include "ingest/readFile.h"
 #include <fstream>
 #include <exception>
+#include <string>
 void readFile(const std::string& path, const std::function<void(const std::string&)>& onLine)
 {
     std::ifstream file(path);

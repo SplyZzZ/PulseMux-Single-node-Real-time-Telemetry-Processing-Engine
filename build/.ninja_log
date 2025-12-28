@@ -1,7 +1,15 @@
 # ninja log v7
-49	1714	7885434684526101	_deps/simdjson-build/CMakeFiles/simdjson.dir/src/simdjson.cpp.obj	582f9046311253e6
-1717	1856	7885434701214317	_deps/simdjson-build/simdjson.lib	e7010b2d65aedbcb
-58	3666	7885434684606066	CMakeFiles/PulseMux_app.dir/apps/main.cpp.obj	164ca8c957173840
-3668	4382	7885434720701975	PulseMux_app.exe	ae47fdfb936dc60d
-58	3157	7885435934466668	CMakeFiles/PulseMux_app.dir/apps/main.cpp.obj	164ca8c957173840
-3158	3556	7885435965460468	PulseMux_app.exe	ae47fdfb936dc60d
+39	1779	7886304623164666	_deps/simdjson-build/CMakeFiles/simdjson.dir/src/simdjson.cpp.obj	582f9046311253e6
+1783	1902	7886304640618091	_deps/simdjson-build/simdjson.lib	e7010b2d65aedbcb
+47	2578	7886304623245217	CMakeFiles/pulsemux_lib.dir/src/ingest/readFile.cpp.obj	458f9a8a0a6bb501
+37	3071	7886306735798876	CMakeFiles/pulsemux.dir/apps/main.cpp.obj	9bb4104d5b509d56
+13	3839	7886348506097687	CMakeFiles/pulsemux_lib.dir/src/parse_validate/parseEvent.cpp.obj	9b341d214522c244
+3841	3964	7886348544377423	pulsemux_lib.lib	ced8a61934f79122
+3965	4187	7886348545617415	pulsemux.exe	6acfe9a7d6515806
+39	2321	7886363029260023	build.ninja	22b7bc0fcf92ddd6
+39	2321	7886363029260023	C:/PulseMux-Single-node-Real-time-Telemetry-Processing-Engine/build/cmake_install.cmake	22b7bc0fcf92ddd6
+39	2321	7886363029260023	C:/PulseMux-Single-node-Real-time-Telemetry-Processing-Engine/build/_deps/simdjson-build/cmake_install.cmake	22b7bc0fcf92ddd6
+41	4357	7886363030270033	CMakeFiles/pulsemux_lib.dir/src/parse_validate/parseEvent.cpp.obj	9b341d214522c244
+10	2994	7886365852620537	CMakeFiles/pulsemux_lib.dir/src/parse_validate/typeConvertation.cpp.obj	ed31e3649d5f8fd6
+2997	3107	7886365882485857	pulsemux_lib.lib	463cf6963260e5b4
+3108	3344	7886365883595857	pulsemux.exe	6acfe9a7d6515806
