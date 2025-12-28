@@ -20,6 +20,7 @@ add_library(pulsemux_lib
     src/ingest/readFile.cpp
     src/parse_validate/parseEvent.cpp
     src/parse_validate/typeConvertation.cpp
+    src/parse_validate/validateData.cpp
 )
 
 target_include_directories(pulsemux_lib PUBLIC
