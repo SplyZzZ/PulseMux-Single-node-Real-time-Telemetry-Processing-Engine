@@ -7,7 +7,10 @@ enum class ValidationError {
     EmptyMetric,
     EmptyTenant,
     SeqInvalid,
-    FieldTooLong
+    FieldTooLong,
+    IngestFromFuture,
+    EventFromFuture,
+    ClockSkewTooLarge
 };
 
 struct ValidationResult {

@@ -6,6 +6,7 @@
 struct Event {
     std::string eventId;
     std::chrono::sys_seconds ts;
+    std::chrono::sys_seconds ingestTs;
     std::string tenant;
     std::string deviceId;
     std::string metric;

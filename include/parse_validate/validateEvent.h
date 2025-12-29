@@ -1,5 +1,2 @@
 #include "event.h"
-void validateEvent(Event event)
-{
-    
-}
+void validateEvent(Event event);

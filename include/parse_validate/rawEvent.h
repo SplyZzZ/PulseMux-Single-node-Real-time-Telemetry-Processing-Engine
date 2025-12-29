@@ -8,4 +8,5 @@ struct RawEvent {
     std::string_view value;
     std::string_view seq;
     std::string_view ts;
+    std::string_view ingestTs;
 };

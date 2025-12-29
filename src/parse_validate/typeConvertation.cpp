@@ -3,7 +3,8 @@
 #include "parse_validate/RawEvent.h"
 #include <charconv>
 #include <chrono>
-Event typeConvertation(const RawEvent& rawEvent)
+#include <optional>
+std::optional<Event> typeConvertation(const RawEvent& rawEvent)
 {
     Event event;
     event.deviceId = std::string(rawEvent.deviceId);
@@ -12,15 +13,32 @@ Event typeConvertation(const RawEvent& rawEvent)
     event.tenant = std::string(rawEvent.tenant);
     {
     auto [ptr, ec] = std::from_chars(rawEvent.value.data(), rawEvent.value.data()+ rawEvent.value.size(), event.value);
+     if (ec != std::errc{} || ptr != rawEvent.value.data() + rawEvent.value.size()) {
+        return std::nullopt;
+    }
     }
     { 
     auto [ptr, ec] = std::from_chars(rawEvent.seq.data(), rawEvent.seq.data()+ rawEvent.seq.size(), event.seq);
+     if (ec != std::errc{} || ptr != rawEvent.seq.data() + rawEvent.seq.size()) {
+        return std::nullopt;
+    }
     }
     
     std::chrono::sys_seconds parsedTs;
-    std::istringstream iss{std::string(rawEvent.ts)};
 
-    iss >> std::chrono::parse("%Y-%m-%d %H:%M:%S", parsedTs);
+    std::istringstream iss{std::string(rawEvent.ts)};
+    iss >> std::chrono::parse("%Y-%m-%dT%H:%M:%SZ", parsedTs);
+    if(iss.fail()) {return std::nullopt;}
+
     event.ts = parsedTs;
+    
+    std::chrono::sys_seconds parsedIngestTs;
+
+    std::istringstream issT{std::string(rawEvent.ingestTs)};
+    issT >> std::chrono::parse("%Y-%m-%dT%H:%M:%SZ", parsedIngestTs);
+    if(issT.fail()) {return std::nullopt;}
+
+    event.ingestTs = parsedIngestTs;
+
     return event;
 }

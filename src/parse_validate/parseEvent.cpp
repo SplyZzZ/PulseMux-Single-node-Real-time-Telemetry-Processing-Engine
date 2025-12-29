@@ -16,7 +16,8 @@ std::optional<RawEvent> parseEvent(std::string_view line)
     RawEvent event;
 
 
-    if (doc["device_id"].get(event.deviceId) ||
+    if (doc["ingest_ts"].get(event.ingestTs) ||
+        doc["device_id"].get(event.deviceId) ||
         doc["event_id"].get(event.eventId)   ||
         doc["tenant"].get(event.tenant)      ||
         doc["metric"].get(event.metric)      ||
