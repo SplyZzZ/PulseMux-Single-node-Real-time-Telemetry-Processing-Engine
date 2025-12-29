@@ -2,4 +2,5 @@
 #include <fstream>
 #include <string>
 #include <functional>
-void readFile(const std::string& path, const std::function<void(const std::string&)>& onLine);
+#include "parse_validate/typeConvertation.h"
+void readFile(const std::string& path, std::function<void(std::string_view)> onLine);

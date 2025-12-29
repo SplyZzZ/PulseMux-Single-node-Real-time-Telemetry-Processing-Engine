@@ -1,4 +1,4 @@
-
+#include "parse_validate/validateDataError.h"
 #include "parse_validate/TimeContext.h"
 ValidationResult validate(const Event& data, const TimeContext& ctx)
 {

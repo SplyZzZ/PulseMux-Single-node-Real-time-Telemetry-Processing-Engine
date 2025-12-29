@@ -2,7 +2,7 @@
 #include <fstream>
 #include <exception>
 #include <string>
-void readFile(const std::string& path, const std::function<void(const std::string&)>& onLine)
+void readFile(const std::string& path,  std::function<void(const std::string_view&)>& onLine)
 {
     std::ifstream file(path);
     if(!file.is_open())

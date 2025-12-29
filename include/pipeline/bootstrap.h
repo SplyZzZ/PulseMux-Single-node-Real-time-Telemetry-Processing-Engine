@@ -1,0 +1,8 @@
+#pragma once
+#include "ingest/readFile.h"
+#include "parse_validate/typeConvertation.h"
+#include "parse_validate/parseEvent.h"
+#include "parse_validate/validateDataError.h"
+#include "parse_validate/TimeContext.h"
+#include <optional>
+void runBootstrap();
