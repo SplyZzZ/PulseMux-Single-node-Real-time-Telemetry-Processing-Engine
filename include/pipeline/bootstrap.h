@@ -4,5 +4,6 @@
 #include "parse_validate/parseEvent.h"
 #include "parse_validate/validateDataError.h"
 #include "parse_validate/TimeContext.h"
+#include "parse_validate/normalize.h"
 #include <optional>
 void runBootstrap();

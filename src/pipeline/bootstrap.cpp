@@ -10,26 +10,27 @@ void runBootstrap()
         // TODO: обробити помилку зупиняюч потік
     }
     for(const auto& file : std::filesystem::directory_iterator(dir))
-    {
+    { 
         if(!file.is_regular_file()) {continue;}
         if(file.path().extension() != ".ndjson") {continue;}
         
         readFile(file.path().string(),[&](std::string_view line)
         {
             auto data = parseEvent(line);
-            if(data)
-            {
-                auto convertData = typeConvertation(data.value());
-                if(convertData)
-                {
-                    auto result = validate(convertData.value());
-                    if(result.ok)
-                    {
-                        //TODO :: Normalizathion
-                    }
-                }
-            }
-                    
+            if (!data) return;
+
+            auto converted = typeConvertation(*data);
+            if (!converted) return;
+
+            auto validation = validate(*converted);
+            if (!validation.ok) return;
+
+            auto scale = normalizationValue(converted->metric);
+            if (!scale) return;
+
+            Event normalized = *converted;  
+            normalized.value *= *scale;
+          
         }
                 
             );
