@@ -160,86 +160,58 @@ PulseMux uses **CMake** as its build system and targets Linux.
 - GCC ≥ 11 or Clang ≥ 14
 - simdjson (system package or submodule)
 
-### Build Steps
+## Design Notes
 
-```bash
-git clone https://github.com/<your-username>/pulsemux.git
-cd pulsemux
+- simdjson is used in streaming mode to minimize allocations and parsing latency
+- Parsing, validation, and normalization are strictly separated stages
+- Stateful components (deduplication, window aggregation) use bounded memory
+- Core data structures are designed for predictable latency and memory usage
 
-git submodule update --init --recursive
+---
 
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-cmake --build . -j
-Run
-From stdin
-cat data/sample.ndjson | ./pulsemux
+## Non-Functional Requirements
 
-From file
-./pulsemux --input data/sample.ndjson
+- stable operation for at least 24 hours
+- RSS memory usage ≤800 MB
+- no memory leaks
+- correct handling of SIGINT and SIGTERM
+- full observability through logs and internal metrics
 
-Drop-folder mode
-./pulsemux --input-dir data/inbox/
-Design Notes
+---
 
-simdjson is used in streaming mode to minimize allocations and parsing latency
-
-Parsing, validation, and normalization are strictly separated stages
-
-Stateful components (deduplication, window aggregation) use bounded memory
-
-Core data structures are designed for predictable latency and memory usage
-
-Non-Functional Requirements
-
-stable operation for at least 24 hours
-
-RSS memory usage ≤800 MB
-
-no memory leaks
-
-correct handling of SIGINT and SIGTERM
-
-full observability through logs and internal metrics
-
-Failure Scenarios
+## Failure Scenarios
 
 Defined and tested scenarios include:
 
-sudden input spikes
+- sudden input spikes
+- large volumes of malformed events
+- slow or failing output IO
+- out-of-order event bursts
+- shutdown under load
+- corrupted files in drop-folder mode
 
-large volumes of malformed events
+---
 
-slow or failing output IO
+## Project Scope
 
-out-of-order event bursts
+### Allowed
 
-shutdown under load
+- STL
+- simdjson
+- CMake-based build
 
-corrupted files in drop-folder mode
+### Out of scope
 
-Project Scope
+- networking protocols
+- external databases
+- distributed processing
+- UI components
 
-Allowed:
+---
 
-STL
+## Repository Structure
 
-simdjson
-
-CMake-based build
-
-Out of scope:
-
-networking protocols
-
-external databases
-
-distributed processing
-
-UI components
-
-Repository Structure
+```text
 project-root/
 ├─ apps/
 ├─ src/
@@ -249,57 +221,3 @@ project-root/
 ├─ tests/
 ├─ tools/
 └─ docs/
-
-Release Plan
-
-MVP
-
-single input source
-
-NDJSON parsing
-
-tumbling windows
-
-aggregates output
-
-logging and basic metrics
-
-graceful shutdown
-
-v1
-
-drop-folder mode
-
-event deduplication
-
-out-of-order handling
-
-p95 aggregation
-
-alerting
-
-backpressure control
-
-full test suite
-
-Acceptance Criteria
-
-all functional scenarios work via CLI
-
-performance targets are met
-
-memory limits are respected
-
-all tests and sanitizer runs pass
-
-Out of Scope
-
-networking integrations
-
-external databases
-
-Prometheus / OpenTelemetry SDKs
-
-GUI
-
-distributed processing
