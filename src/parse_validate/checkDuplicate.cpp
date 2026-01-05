@@ -3,23 +3,30 @@
 #include <deque>
 #include <string>
 #include <chrono>
-#include <pair>
-static std::unordered_map<std::string, std::chrono::sys_seconds> cache;
-cache.reserve(10000);
-static std::deque<std::pair<std::chrono::sys_seconds, std::string>> order;
-order.reserve(10000);
+#include <utility>
+
 bool checkDuplicate(std::string_view eventId, const std::chrono::sys_seconds& ts)
 {
+    static std::unordered_map<std::string, std::chrono::sys_seconds> cache;
+    static std::deque<std::pair<std::chrono::sys_seconds, std::string>> order;
+    static auto _ = []()
+    {
+        cache.reserve(10000);
+        return 0;
+    }(); 
     while(!order.empty())
     {
-        auto [time, id] = order.front();
-        if(ts <= time+std::chrono::sys_seconds(300)) { break; }
-        if(cache.find(id) != cache.end()) { cache.erase(id);}
-        order.pop();
+        const auto& [time, id] = order.front();
+        if(ts <= time + std::chrono::sys_seconds(300)) { break;}
+        cache.erase(id);
+        order.pop_front();
     }
-    if(cache.contains(eventId)){return true;}
-    //TODO: баг пофіксити 
-    cache[eventId] = ts;
-    order.emplace(ts, eventId);
+    if(cache.contains(eventId))
+    {
+        return true;
+    }
+    std::string idCopy(eventId);
+    cache.try_emplace(idCopy, ts);
+    order.emplace_back(ts, std::move(idCopy);
     return false;
 }
