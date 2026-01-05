@@ -1,5 +1,5 @@
 #include "pipeline/bootstrap.h"
-
+#include "parse_validate/checkDuplicate.h"
 #include <filesystem>
 void runBootstrap()
 {
@@ -14,25 +14,29 @@ void runBootstrap()
         if(!file.is_regular_file()) {continue;}
         if(file.path().extension() != ".ndjson") {continue;}
         
-        readFile(file.path().string(),[&](std::string_view line)
-        {
-            auto data = parseEvent(line);
-            if (!data) return;
+       readFile(
+    file.path().string(),
+    [&](std::string_view line)
+    {
+        auto data = parseEvent(line);
+        if (!data) return;
 
-            auto converted = typeConvertation(*data);
-            if (!converted) return;
+        auto converted = typeConvertation(*data);
+        if (!converted) return;
 
-            auto validation = validate(*converted);
-            if (!validation.ok) return;
+        auto validation = validate(*converted);
+        if (!validation.ok) return;
 
-            auto scale = normalizationValue(converted->metric);
-            if (!scale) return;
+        auto scale = normalizationValue(converted->metric);
+        if (!scale) return;
 
-            Event normalized = *converted;  
-            normalized.value *= *scale;
-          
-        }
-                
-            );
+        Event normalized = *converted;
+        normalized.value *= *scale;
+
+        if (checkDuplicate(normalized.eventId, normalized.ts)) return;
+        
+       
+    }
+);
     }
 }

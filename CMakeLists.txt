@@ -23,7 +23,10 @@ add_library(pulsemux_lib
     src/parse_validate/validateDataError.cpp
     src/pipeline/bootstrap.cpp
     src/parse_validate/metricRegistry.cpp
-    src/normalize.cpp
+    src/parse_validate/normalize.cpp
+    src/parse_validate/checkDuplicate.cpp
+    src/pipeline/router.cpp
+    src/pipeline/worker.cpp
 )
 
 target_include_directories(pulsemux_lib PUBLIC

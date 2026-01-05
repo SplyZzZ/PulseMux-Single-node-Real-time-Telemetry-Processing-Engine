@@ -17,16 +17,17 @@ bool checkDuplicate(std::string_view eventId, const std::chrono::sys_seconds& ts
     while(!order.empty())
     {
         const auto& [time, id] = order.front();
-        if(ts <= time + std::chrono::sys_seconds(300)) { break;}
+        if(ts <= time + std::chrono::seconds{123}) { break;}
         cache.erase(id);
         order.pop_front();
     }
-    if(cache.contains(eventId))
+
+    std::string idCopy(eventId);
+    if(cache.contains(idCopy))
     {
         return true;
     }
-    std::string idCopy(eventId);
     cache.try_emplace(idCopy, ts);
-    order.emplace_back(ts, std::move(idCopy);
+    order.emplace_back(ts, std::move(idCopy));
     return false;
 }
