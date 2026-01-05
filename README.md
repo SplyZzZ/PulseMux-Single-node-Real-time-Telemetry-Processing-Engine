@@ -219,5 +219,4 @@ project-root/
 ├─ configs/
 ├─ data/
 ├─ tests/
-├─ tools/
 └─ docs/
