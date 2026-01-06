@@ -1,9 +1,13 @@
 #include "pipeline/bootstrap.h"
 #include "parse_validate/checkDuplicate.h"
+#include "pipeline/router.h"
+#include "pipeline/worker.h"
+#include <thread>
 #include <filesystem>
 void runBootstrap()
 {
-    TimeContext timeContext;
+    size_t workerCount = std::thread::hardware_concurrency()-1; 
+    std::vector<Worker> workersList(workerCount);
     std::filesystem::path dir = "C:/PulseMux-Single-node-Real-time-Telemetry-Processing-Engine/data";
     if(!std::filesystem::exists(dir) || !std::filesystem::is_directory(dir))
     {
@@ -27,14 +31,15 @@ void runBootstrap()
         auto validation = validate(*converted);
         if (!validation.ok) return;
 
+
         auto scale = normalizationValue(converted->metric);
         if (!scale) return;
 
-        Event normalized = *converted;
-        normalized.value *= *scale;
+        auto idx = router(converted->tenant, converted->deviceId, converted->metric, workerCount);
+        workersList[idx].set(std::move(*converted));
 
-        if (checkDuplicate(normalized.eventId, normalized.ts)) return;
-        
+        // if (checkDuplicate(normalized.eventId, normalized.ts)) return;
+
        
     }
 );
