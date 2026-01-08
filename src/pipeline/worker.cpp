@@ -1,10 +1,12 @@
 #include "pipeline/worker.h"
 #include <thread>
+#include <chrono>
 #include <queue>
 #include <mutex>
 #include "parse_validate/event.h"
 #include "parse_validate/normalize.h"
 #include "parse_validate/checkDuplicate.h"
+constexpr std::chrono::seconds WINDOW_SIZE{10};
 Worker::Worker()
 {
     running_ = true;
@@ -22,11 +24,11 @@ void Worker::run()
         Event ev = std::move(task_.front());
         task_.pop();
         lock.unlock();
-        auto scale = normalizationValue(converted->metric);
+        auto scale = normalizationValue(ev.metric);
         // if (!scale) return; TODO:: add log;
         ev.value *= *scale;
-        if (checkDuplicate(normalized.eventId, normalized.ts)) return; // return log
-        
+        if (checkDuplicate(ev.eventId, ev.ts)) continue; //TODO: return log
+        // auto windowsStart = ev.ts - (ev.ts % WINDOWS_SIZE);
     }
     
 }
@@ -43,7 +45,7 @@ Worker::~Worker()
         running_ = false;
     }
     queueIsReady_.notify_one();
-    if(worker_.joinable)
+    if(worker_.joinable())
     {
         worker_.join();
     }

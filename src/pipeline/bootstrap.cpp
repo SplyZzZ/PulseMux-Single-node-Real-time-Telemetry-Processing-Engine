@@ -1,6 +1,7 @@
 #include "pipeline/bootstrap.h"
 #include "parse_validate/checkDuplicate.h"
 #include "pipeline/router.h"
+#include "parse_validate/normalize.h"
 #include "pipeline/worker.h"
 #include <thread>
 #include <filesystem>
@@ -35,10 +36,8 @@ void runBootstrap()
         auto scale = normalizationValue(converted->metric);
         if (!scale) return;
 
-        auto idx = router(converted->tenant, converted->deviceId, converted->metric, workerCount);
+        auto idx = router(converted->tenant, converted->deviceId, converted->metric, 10);
         workersList[idx].set(std::move(*converted));
-
-        // if (checkDuplicate(normalized.eventId, normalized.ts)) return;
 
        
     }

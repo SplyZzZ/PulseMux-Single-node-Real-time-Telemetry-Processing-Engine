@@ -115,6 +115,61 @@ build CMakeFiles\pulsemux_lib.dir\src\parse_validate\metricRegistry.cpp.obj: CXX
   TARGET_PDB = pulsemux_lib.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\pulsemux_lib.dir
 
+build CMakeFiles\pulsemux_lib.dir\src\parse_validate\normalize.cpp.obj: CXX_COMPILER__pulsemux_lib_unscanned_Debug C$:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\src\parse_validate\normalize.cpp || cmake_object_order_depends_target_pulsemux_lib
+  CONFIG = Debug
+  DEFINES = -DSIMDJSON_THREADS_ENABLED=1
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd /W4
+  INCLUDES = -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\include -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\build\_deps\simdjson-src\include
+  OBJECT_DIR = CMakeFiles\pulsemux_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\pulsemux_lib.dir\src\parse_validate
+  TARGET_COMPILE_PDB = CMakeFiles\pulsemux_lib.dir\pulsemux_lib.pdb
+  TARGET_PDB = pulsemux_lib.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\pulsemux_lib.dir
+
+build CMakeFiles\pulsemux_lib.dir\src\parse_validate\checkDuplicate.cpp.obj: CXX_COMPILER__pulsemux_lib_unscanned_Debug C$:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\src\parse_validate\checkDuplicate.cpp || cmake_object_order_depends_target_pulsemux_lib
+  CONFIG = Debug
+  DEFINES = -DSIMDJSON_THREADS_ENABLED=1
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd /W4
+  INCLUDES = -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\include -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\build\_deps\simdjson-src\include
+  OBJECT_DIR = CMakeFiles\pulsemux_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\pulsemux_lib.dir\src\parse_validate
+  TARGET_COMPILE_PDB = CMakeFiles\pulsemux_lib.dir\pulsemux_lib.pdb
+  TARGET_PDB = pulsemux_lib.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\pulsemux_lib.dir
+
+build CMakeFiles\pulsemux_lib.dir\src\pipeline\router.cpp.obj: CXX_COMPILER__pulsemux_lib_unscanned_Debug C$:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\src\pipeline\router.cpp || cmake_object_order_depends_target_pulsemux_lib
+  CONFIG = Debug
+  DEFINES = -DSIMDJSON_THREADS_ENABLED=1
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd /W4
+  INCLUDES = -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\include -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\build\_deps\simdjson-src\include
+  OBJECT_DIR = CMakeFiles\pulsemux_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\pulsemux_lib.dir\src\pipeline
+  TARGET_COMPILE_PDB = CMakeFiles\pulsemux_lib.dir\pulsemux_lib.pdb
+  TARGET_PDB = pulsemux_lib.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\pulsemux_lib.dir
+
+build CMakeFiles\pulsemux_lib.dir\src\pipeline\worker.cpp.obj: CXX_COMPILER__pulsemux_lib_unscanned_Debug C$:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\src\pipeline\worker.cpp || cmake_object_order_depends_target_pulsemux_lib
+  CONFIG = Debug
+  DEFINES = -DSIMDJSON_THREADS_ENABLED=1
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd /W4
+  INCLUDES = -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\include -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\build\_deps\simdjson-src\include
+  OBJECT_DIR = CMakeFiles\pulsemux_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\pulsemux_lib.dir\src\pipeline
+  TARGET_COMPILE_PDB = CMakeFiles\pulsemux_lib.dir\pulsemux_lib.pdb
+  TARGET_PDB = pulsemux_lib.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\pulsemux_lib.dir
+
+build CMakeFiles\pulsemux_lib.dir\src\windowing\windowAggregator.cpp.obj: CXX_COMPILER__pulsemux_lib_unscanned_Debug C$:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\src\windowing\windowAggregator.cpp || cmake_object_order_depends_target_pulsemux_lib
+  CONFIG = Debug
+  DEFINES = -DSIMDJSON_THREADS_ENABLED=1
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd /W4
+  INCLUDES = -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\include -IC:\PulseMux-Single-node-Real-time-Telemetry-Processing-Engine\build\_deps\simdjson-src\include
+  OBJECT_DIR = CMakeFiles\pulsemux_lib.dir
+  OBJECT_FILE_DIR = CMakeFiles\pulsemux_lib.dir\src\windowing
+  TARGET_COMPILE_PDB = CMakeFiles\pulsemux_lib.dir\pulsemux_lib.pdb
+  TARGET_PDB = pulsemux_lib.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\pulsemux_lib.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target pulsemux_lib
@@ -123,7 +178,7 @@ build CMakeFiles\pulsemux_lib.dir\src\parse_validate\metricRegistry.cpp.obj: CXX
 #############################################
 # Link the static library pulsemux_lib.lib
 
-build pulsemux_lib.lib: CXX_STATIC_LIBRARY_LINKER__pulsemux_lib_Debug CMakeFiles\pulsemux_lib.dir\src\ingest\readFile.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\parseEvent.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\typeConvertation.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\validateDataError.cpp.obj CMakeFiles\pulsemux_lib.dir\src\pipeline\bootstrap.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\metricRegistry.cpp.obj || _deps\simdjson-build\simdjson.lib
+build pulsemux_lib.lib: CXX_STATIC_LIBRARY_LINKER__pulsemux_lib_Debug CMakeFiles\pulsemux_lib.dir\src\ingest\readFile.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\parseEvent.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\typeConvertation.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\validateDataError.cpp.obj CMakeFiles\pulsemux_lib.dir\src\pipeline\bootstrap.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\metricRegistry.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\normalize.cpp.obj CMakeFiles\pulsemux_lib.dir\src\parse_validate\checkDuplicate.cpp.obj CMakeFiles\pulsemux_lib.dir\src\pipeline\router.cpp.obj CMakeFiles\pulsemux_lib.dir\src\pipeline\worker.cpp.obj CMakeFiles\pulsemux_lib.dir\src\windowing\windowAggregator.cpp.obj || _deps\simdjson-build\simdjson.lib
   CONFIG = Debug
   LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:X86

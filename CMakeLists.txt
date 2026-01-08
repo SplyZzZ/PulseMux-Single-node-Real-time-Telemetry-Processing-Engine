@@ -27,6 +27,7 @@ add_library(pulsemux_lib
     src/parse_validate/checkDuplicate.cpp
     src/pipeline/router.cpp
     src/pipeline/worker.cpp
+    src/windowing/windowAggregator.cpp
 )
 
 target_include_directories(pulsemux_lib PUBLIC

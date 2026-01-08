@@ -1,4 +1,6 @@
 #include "ingest/readFile.h"
+#include "pipeline/router.h"
+#include "pipeline/worker.h"
 #include <fstream>
 #include <exception>
 #include <string>
