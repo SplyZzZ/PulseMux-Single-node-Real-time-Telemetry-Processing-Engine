@@ -17,7 +17,7 @@ bool checkDuplicate(std::string_view eventId, const std::chrono::sys_seconds& ts
     while(!order.empty())
     {
         const auto& [time, id] = order.front();
-        if(ts <= time + std::chrono::seconds{123}) { break;}
+        if(ts <= time + std::chrono::seconds{300}) { break;}
         cache.erase(id);
         order.pop_front();
     }

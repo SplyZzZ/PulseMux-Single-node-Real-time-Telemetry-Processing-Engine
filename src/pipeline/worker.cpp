@@ -3,10 +3,11 @@
 #include <chrono>
 #include <queue>
 #include <mutex>
+#include <algorithm>
 #include "parse_validate/event.h"
 #include "parse_validate/normalize.h"
 #include "parse_validate/checkDuplicate.h"
-constexpr std::chrono::seconds WINDOW_SIZE{10};
+
 Worker::Worker()
 {
     running_ = true;
@@ -19,7 +20,7 @@ void Worker::run()
         std::unique_lock<std::mutex> lock(workerMutex_);
         queueIsReady_.wait(lock, [this]() {
             return !task_.empty() || !running_;
-        });
+        }); 
         if(!running_ && task_.empty()) {return;}
         Event ev = std::move(task_.front());
         task_.pop();
@@ -28,7 +29,16 @@ void Worker::run()
         // if (!scale) return; TODO:: add log;
         ev.value *= *scale;
         if (checkDuplicate(ev.eventId, ev.ts)) continue; //TODO: return log
-        // auto windowsStart = ev.ts - (ev.ts % WINDOWS_SIZE);
+        auto windowsStart =  ev.ts - (ev.ts.time_since_epoch() % WINDOW_SIZE);
+        WindowsKey key;
+        key.deviceID = ev.deviceId;
+        key.metric = ev.metric;
+        key.tenant = ev.tenant;
+        key.windowStart = windowsStart;
+        watermakr_ = (maxTimeSeen_ - LATENESS);
+        auto& isKey = windows_[key];
+        update(isKey, ev.value); 
+        maxTimeSeen_ = std::max(maxTimeSeen_, ev.ts);
     }
     
 }
@@ -49,4 +59,22 @@ Worker::~Worker()
     {
         worker_.join();
     }
+}
+
+void Worker::closeWindows(const std::chrono::sys_seconds& watermark)
+{
+   for(auto& it = windows_.begin(); it != windows_.end(); )
+   {
+        auto windowsEnd = it->first.windowStart + LATENESS;
+        if(windowsEnd <= watermark)
+        {
+            //it.emit(); TODO: Create function for out data
+            it = windows_.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+   }
+    
 }

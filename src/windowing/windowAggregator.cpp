@@ -1,7 +1,7 @@
 #include "windowing/windowAggregator.h"
 #include <algorithm>
 #include <chrono>
-void update(WindowsData&& data, double value)
+void update(WindowsData& data, double value)
 {
  ++data.count;
  data.sum += value;

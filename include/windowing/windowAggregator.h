@@ -3,7 +3,7 @@
 #include <string>
 struct WindowsKey
 {
-   std::chrono::time_point<std::chrono::system_clock> windowStart;
+   std::chrono::sys_seconds windowStart;
     std::string deviceID;
     std::string metric;
     std::string tenant;
@@ -19,4 +19,4 @@ struct WindowsData
 struct WindowsKeyHash {
     size_t operator()(const WindowsKey& k) const noexcept;
 };
-void update(WindowsData&& data, double value);
+void update(WindowsData& data, double value);
