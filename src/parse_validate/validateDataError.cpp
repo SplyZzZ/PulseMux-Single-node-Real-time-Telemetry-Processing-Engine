@@ -1,8 +1,9 @@
 #include "parse_validate/validateDataError.h"
 #include "parse_validate/TimeContext.h"
+#include <limits>
 ValidationResult validate(const Event& data, const TimeContext& ctx)
 {
-    
+
     if (data.deviceId.empty()) { return {false, ValidationError::EmptyDeviceId};} 
 
     if (data.deviceId.size() >= 128) {return {false, ValidationError::FieldTooLong};}
@@ -14,7 +15,7 @@ ValidationResult validate(const Event& data, const TimeContext& ctx)
     if (data.metric.empty()) {return {false, ValidationError::EmptyMetric};}
 
     if (data.metric.size() >= 128) {return {false, ValidationError::FieldTooLong};}
-
+//TODO: Validate value for metric
     if (data.tenant.empty()) {return {false, ValidationError::EmptyTenant};}
 
     if (data.tenant.size() >= 128) {return {false, ValidationError::FieldTooLong};}

@@ -3,7 +3,11 @@
 #include "parse_validate/RawEvent.h"
 #include <charconv>
 #include <chrono>
+#include <sstream>
 #include <optional>
+#include <date/date.h>
+
+using namespace date;
 std::optional<Event> typeConvertation(const RawEvent& rawEvent)
 {
     Event event;
@@ -12,7 +16,7 @@ std::optional<Event> typeConvertation(const RawEvent& rawEvent)
     event.metric = std::string(rawEvent.metric);
     event.tenant = std::string(rawEvent.tenant);
     {
-    auto [ptr, ec] = std::from_chars(rawEvent.value.data(), rawEvent.value.data()+ rawEvent.value.size(), event.value);
+    auto [ptr, ec] = std::from_chars(rawEvent.value.data(), rawEvent.value.data() + rawEvent.value.size(), event.value);
      if (ec != std::errc{} || ptr != rawEvent.value.data() + rawEvent.value.size()) {
         return std::nullopt;
     }
@@ -27,7 +31,7 @@ std::optional<Event> typeConvertation(const RawEvent& rawEvent)
     std::chrono::sys_seconds parsedTs;
 
     std::istringstream iss{std::string(rawEvent.ts)};
-    iss >> std::chrono::parse("%Y-%m-%dT%H:%M:%SZ", parsedTs);
+    iss >> parse("%Y-%m-%dT%H:%M:%SZ", parsedTs);
     if(iss.fail()) {return std::nullopt;}
 
     event.ts = parsedTs;
@@ -35,7 +39,7 @@ std::optional<Event> typeConvertation(const RawEvent& rawEvent)
     std::chrono::sys_seconds parsedIngestTs;
 
     std::istringstream issT{std::string(rawEvent.ingestTs)};
-    issT >> std::chrono::parse("%Y-%m-%dT%H:%M:%SZ", parsedIngestTs);
+    issT >> parse("%Y-%m-%dT%H:%M:%SZ", parsedIngestTs);
     if(issT.fail()) {return std::nullopt;}
 
     event.ingestTs = parsedIngestTs;

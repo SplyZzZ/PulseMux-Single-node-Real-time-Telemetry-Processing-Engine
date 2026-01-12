@@ -2,9 +2,8 @@
 #include "parse_validate/rawEvent.h"
 #include <string>
 #include <simdjson.h>
-#include <exception>
 #include <optional>
-#include <chrono>
+
 
 std::optional<RawEvent> parseEvent(std::string_view line)
 {

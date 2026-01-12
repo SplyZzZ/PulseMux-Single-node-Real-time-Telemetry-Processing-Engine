@@ -66,6 +66,7 @@ Worker::~Worker()
     if(worker_.joinable())
     {
         worker_.join();
+
     }
 }
 
