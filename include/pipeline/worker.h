@@ -7,6 +7,7 @@
 #include "windowing/windowAggregator.h"
 #include <unordered_map>
 #include <chrono>
+#include "alerting/cusumState.h"
 constexpr std::chrono::seconds WINDOW_SIZE{10};
 constexpr std::chrono::seconds LATENESS{5};
 class Worker
@@ -26,6 +27,7 @@ private:
     std::unordered_map<WindowsKey, WindowsData, WindowsKeyHash> windows_;
     std::chrono::sys_seconds maxTimeSeen_;
     std::chrono::sys_seconds watermakr_;
-    
+    std::unordered_map<WindowsKey, CusumState, WindowsKeyHash> cusum_;
     void closeWindows(const std::chrono::sys_seconds& watermark);
+    void updateCusum(const WindowsKey& key, double avg);
 };
